@@ -1,113 +1,69 @@
-[package]
-name = "rust-bert"
-version = "0.23.0"
-authors = ["Guillaume Becquin <guillaume.becquin@gmail.com>"]
-edition = "2018"
-description = "Ready-to-use NLP pipelines and language models"
-repository = "https://github.com/guillaume-be/rust-bert"
-documentation = "https://docs.rs/rust-bert"
-license = "Apache-2.0"
-readme = "README.md"
-build = "build.rs"
-keywords = [
-    "nlp",
-    "deep-learning",
-    "machine-learning",
-    "transformers",
-    "translation",
-]
+[[bench]]
+harness = false
+name = "sst2_benchmark"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bench]]
+harness = false
+name = "squad_benchmark"
 
-[lib]
-name = "rust_bert"
-path = "src/lib.rs"
-crate-type = ["lib"]
+[[bench]]
+harness = false
+name = "summarization_benchmark"
+
+[[bench]]
+harness = false
+name = "translation_benchmark"
+
+[[bench]]
+harness = false
+name = "generation_benchmark"
+
+[[bench]]
+harness = false
+name = "tensor_operations_benchmark"
+
+[[bench]]
+harness = false
+name = "token_classification_benchmark"
 
 [[bin]]
+doc = false
 name = "convert-tensor"
 path = "src/convert-tensor.rs"
-doc = false
-
-[[bench]]
-name = "sst2_benchmark"
-harness = false
-
-[[bench]]
-name = "squad_benchmark"
-harness = false
-
-[[bench]]
-name = "summarization_benchmark"
-harness = false
-
-[[bench]]
-name = "translation_benchmark"
-harness = false
-
-[[bench]]
-name = "generation_benchmark"
-harness = false
-
-[[bench]]
-name = "tensor_operations_benchmark"
-harness = false
-
-[[bench]]
-name = "token_classification_benchmark"
-harness = false
-
-[profile.bench]
-opt-level = 3
-
-[features]
-default = ["remote", "default-tls"]
-doc-only = ["tch/doc-only"]
-all-tests = []
-remote = ["cached-path", "dirs", "lazy_static"]
-download-libtorch = ["tch/download-libtorch"]
-onnx = ["ort", "ndarray"]
-rustls-tls = ["cached-path/rustls-tls"]
-default-tls = ["cached-path/default-tls"]
-hf-tokenizers = ["tokenizers"]
-
-[package.metadata.docs.rs]
-features = ["doc-only"]
 
 [dependencies]
-rust_tokenizers = "8.1.1"
-tch = { version = "0.17.0", features = ["download-libtorch"] }
-serde_json = "1"
-serde = { version = "1", features = ["derive"] }
-ordered-float = "4.2.0"
-uuid = { version = "1", features = ["v4"] }
-thiserror = "1"
-half = "2"
-regex = "1.10"
-
 cached-path = { version = "0.6", default-features = false, optional = true }
 dirs = { version = "5", optional = true }
+half = "2"
 lazy_static = { version = "1", optional = true }
+ndarray = { version = "0.15", optional = true }
+ordered-float = "4.2.0"
 ort = { version = "1.16.3", optional = true, default-features = false, features = [
     "half",
 ] }
-ndarray = { version = "0.15", optional = true }
+regex = "1.10"
+rust_tokenizers = "8.1.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tch = { version = "0.17.0", features = ["download-libtorch"] }
+thiserror = "1"
 tokenizers = { version = "0.20", optional = true, default-features = false, features = [
     "onig",
 ] }
+uuid = { version = "1", features = ["v4"] }
 
 [dev-dependencies]
 anyhow = "1"
-csv = "1"
 criterion = "0.5"
-tokio = { version = "1.35", features = ["sync", "rt-multi-thread", "macros"] }
-tempfile = "3"
+csv = "1"
 itertools = "0.13.0"
+ort = { version = "1.16.3", features = ["load-dynamic"] }
+tempfile = "3"
+tokio = { version = "1.35", features = ["sync", "rt-multi-thread", "macros"] }
 tracing-subscriber = { version = "0.3", default-features = false, features = [
     "env-filter",
     "fmt",
 ] }
-ort = { version = "1.16.3", features = ["load-dynamic"] }
 
 [[example]]
 name = "onnx-masked-lm"
@@ -136,3 +92,50 @@ required-features = ["onnx"]
 [[example]]
 name = "generation_gpt2_hf_tokenizers"
 required-features = ["hf-tokenizers"]
+
+[features]
+all-tests = []
+default = ["remote", "default-tls"]
+default-tls = ["cached-path/default-tls"]
+doc-only = ["tch/doc-only"]
+download-libtorch = ["tch/download-libtorch"]
+hf-tokenizers = ["tokenizers"]
+onnx = ["ort", "ndarray"]
+remote = ["cached-path", "dirs", "lazy_static"]
+rustls-tls = ["cached-path/rustls-tls"]
+
+[lib]
+crate-type = ["lib"]
+name = "rust_bert"
+path = "src/lib.rs"
+
+[package]
+authors = ["Guillaume Becquin <guillaume.becquin@gmail.com>"]
+build = "build.rs"
+description = "Ready-to-use NLP pipelines and language models"
+documentation = "https://docs.rs/rust-bert"
+edition = "2018"
+keywords = [
+    "nlp",
+    "deep-learning",
+    "machine-learning",
+    "transformers",
+    "translation",
+]
+license = "Apache-2.0"
+name = "rust-bert"
+readme = "README.md"
+repository = "https://github.com/guillaume-be/rust-bert"
+version = "0.23.0"
+
+[package.metadata]
+
+[package.metadata.docs]
+
+[package.metadata.docs.rs]
+features = ["doc-only"]
+
+[profile]
+
+[profile.bench]
+opt-level = 3
