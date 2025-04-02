@@ -33,21 +33,21 @@ path = "src/convert-tensor.rs"
 
 [dependencies]
 cached-path = { version = "0.6", default-features = false, optional = true }
-dirs = { version = "5", optional = true }
+dirs = { version = "6", optional = true }
 half = "2"
 lazy_static = { version = "1", optional = true }
-ndarray = { version = "0.15", optional = true }
-ordered-float = "4.2.0"
+ndarray = { version = "0.16", optional = true }
+ordered-float = "5.0.0"
 ort = { version = "1.16.3", optional = true, default-features = false, features = [
     "half",
 ] }
-regex = "1.10"
+regex = "1.11"
 rust_tokenizers = "8.1.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tch = { version = "0.17.0", features = ["download-libtorch"] }
-thiserror = "1"
-tokenizers = { version = "0.20", optional = true, default-features = false, features = [
+tch = { version = "0.19.0", features = ["download-libtorch"] }
+thiserror = "2"
+tokenizers = { version = "0.21", optional = true, default-features = false, features = [
     "onig",
 ] }
 uuid = { version = "1", features = ["v4"] }
@@ -56,10 +56,10 @@ uuid = { version = "1", features = ["v4"] }
 anyhow = "1"
 criterion = "0.5"
 csv = "1"
-itertools = "0.13.0"
+itertools = "0.14.0"
 ort = { version = "1.16.3", features = ["load-dynamic"] }
 tempfile = "3"
-tokio = { version = "1.35", features = ["sync", "rt-multi-thread", "macros"] }
+tokio = { version = "1.44", features = ["sync", "rt-multi-thread", "macros"] }
 tracing-subscriber = { version = "0.3", default-features = false, features = [
     "env-filter",
     "fmt",
